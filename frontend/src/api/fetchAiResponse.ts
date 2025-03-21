@@ -1,7 +1,6 @@
 import axios from "axios";
 
 // Load API key from .env file
-const API_KEY = import.meta.env.GEMINI_KEY;
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 export const fetchData = async (text: string): Promise<string | null> => {

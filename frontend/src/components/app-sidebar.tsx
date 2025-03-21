@@ -13,8 +13,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 export function AppSideBar() {
