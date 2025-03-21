@@ -2,17 +2,18 @@ import axios from "axios";
 
 // Load API key from .env file
 const API_KEY = import.meta.env.GEMINI_KEY;
-const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 export const fetchData = async (text: string): Promise<string | null> => {
   try {
     const response = await axios.post(
-      `${BASE_URL}?key=${API_KEY}`,
+      `${BASE_URL}?key=AIzaSyBUpfWeYgLnO3fjozUkeHIHO1n0yM8o7Bg`,
       {
         contents: [{ parts: [{ text }] }],
       }
     );
 
+    console.log("This runs")
     const result = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     return result || "No response text available";

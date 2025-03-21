@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 import { AppSideBar } from './components/app-sidebar';
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import HomePage from './pages/HomePage';
+import Profiles from './pages/Profiles';
+import Spaces from './pages/Spaces';
 
 
 
@@ -32,7 +34,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='/profiles' element={<HomePage />} />
+          <Route path='/profiles' element={<Profiles />} />
+          <Route path='/spaces' element={<Spaces />} />
         </Route>
       </Routes>
     </Router>

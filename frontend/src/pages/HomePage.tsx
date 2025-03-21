@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { fetchData } from "@/api/fetchAiResponse";
+import ReactMarkdown from 'react-markdown'
 
 const HomePage: React.FC = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -40,20 +41,22 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-2 w-1/2 h-full p-4">
-          <Card className="h-3/5 w-full">
-            <CardHeader>
-              <CardTitle>Response</CardTitle>
-              <CardDescription>Your digital clone's response</CardDescription>
+          <Card className="h-[60vh] w-full border border-gray-200 shadow-lg rounded-2xl p-0">
+            <CardHeader className="p-4">
+              <CardTitle className="text-lg font-bold">Response</CardTitle>
+              <CardDescription className="text-sm text-gray-500">
+                Your digital clone's response
+              </CardDescription>
             </CardHeader>
-          </Card>
-
-          {aiResponse && (
-            <div>
-              <CardContent className="overflow-y-auto max-h-[calc(100%-theme(space.12))] p-4">
-                {aiResponse}
+            {aiResponse && (
+              <CardContent
+                className="prose prose-stone max-w-none overflow-y-auto max-h-[calc(100%-theme(space.16))] w-full  
+                 p-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+              >
+                <ReactMarkdown >{aiResponse}</ReactMarkdown>
               </CardContent>
-            </div>
-          )}
+            )}
+          </Card>
 
           <div className="flex space-x-2 w-full justify-center items-center h-2/5">
             <Input
@@ -62,7 +65,7 @@ const HomePage: React.FC = () => {
               className="p-4 w-4/5"
               onChange={handleChange}
             />
-            <Button type="submit" onClick={fetchAiResponse}>
+            <Button type="submit" onClick={fetchAiResponse} className="bg-[#0084ff] hover:bg-blue-400">
               Submit
             </Button>
           </div>
