@@ -20,7 +20,7 @@ const Layout = () => {
           {/* This will change based on the route */}
           <Outlet />
         </div>
-      </SidebarInset>
+      </SidebarInset> 
     </SidebarProvider>
   );
 };

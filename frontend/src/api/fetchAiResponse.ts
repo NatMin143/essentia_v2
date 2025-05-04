@@ -1,32 +1,25 @@
 import axios from "axios";
 
-// Load API key from .env file
-const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const BASE_URL = "http://localhost:3000/ai-response";
 
-export const fetchData = async (text: string): Promise<string | null> => {
+export const fetchData = async (text: string, conversationHistory: string[]): Promise<string | null> => {
   try {
-    const response = await axios.post(
-      `${BASE_URL}?key=AIzaSyBUpfWeYgLnO3fjozUkeHIHO1n0yM8o7Bg`,
-      {
-        contents: [{ parts: [{ text }] }],
-      }
-    );
+    const response = await axios.post(BASE_URL, { text, conversationHistory });
 
-    console.log("This runs")
-    const result = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    return result || "No response text available";
-  } catch (error) {
-    console.error("Fetch error:", error);
-
-    // Detailed error handling
-    if (axios.isAxiosError(error)) {
-      console.error("Axios error:", error.response?.data || error.message);
+    if (response.status === 200) {
+      return response.data; 
     } else {
-      console.error("Unexpected error:", error);
+      console.error("Unexpected status code:", response.status);
+      return `Unexpected status code: ${response.status}`;
     }
+  } catch (error: any) {
+    console.error("Error fetching AI response:", error.message);
 
-    return null; // Ensure graceful fallback
+    if (axios.isAxiosError(error)) {
+      return `Axios error: ${error.response?.data?.message || error.message}`;
+    } else {
+      return "Unexpected error occurred";
+    }
   }
 };
 
